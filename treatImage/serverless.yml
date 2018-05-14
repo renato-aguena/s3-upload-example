@@ -1,0 +1,44 @@
+service: treat-image
+
+package:
+  exclude:
+    - node_modules/**
+    - package.json
+    - package-lock.json
+  individually: true
+
+plugins:
+  - serverless-plugin-include-dependencies
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: prod
+  region: sa-east-1
+  timeout: 300
+
+functions:
+  resize:
+    handler: src/app.handler
+    events:
+      - s3:
+          bucket: bucket_name_temp
+          event: s3:ObjectCreated:Put
+
+resources:
+  Resources:
+    S3BucketFieldControlImagesOfficial:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: bucket_name_official
+        CorsConfiguration:
+          CorsRules:
+          - AllowedMethods:
+            - GET
+            - PUT
+            - POST
+            - HEAD
+            AllowedOrigins:
+            - "*"
+            AllowedHeaders:
+            - "*"

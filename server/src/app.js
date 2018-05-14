@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const aws = require('aws-sdk');
+const serverless = require('serverless-http');
 const awsConfig = require('./config').aws;
 const port = process.env.PORT || 3000;
 
@@ -28,7 +29,6 @@ app.get('/signS3', function (req, res) {
 
     s3.getSignedUrl('putObject', s3Params, (err, data) => {
         if (err) {
-            console.log('err', err);
             return res.status(422).json(err);
         }
         const returnData = {
@@ -39,6 +39,4 @@ app.get('/signS3', function (req, res) {
     });
 });
 
-app.listen(port, () => {
-    console.log('Server running at port:' + port + '/');
-});
+module.exports.handler = serverless(app);

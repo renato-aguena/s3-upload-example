@@ -1,3 +1,13 @@
 #server
 server/node_modules
 server/package-lock.json
+server/.serverless
+
+#treat image
+treatImage/node_modules
+treatImage/package-lock.json
+treatImage/.serverless
+
+
+#default
+.vscode/*

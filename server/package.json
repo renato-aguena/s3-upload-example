@@ -12,6 +12,12 @@
     "aws-sdk": "^2.238.1",
     "body-parser": "^1.18.2",
     "cors": "^2.8.4",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "serverless-http": "^1.5.3"
+  },
+  "devDependencies": {
+    "serverless-offline": "^3.16.0",
+    "serverless-mocha-plugin": "^1.7.0",
+    "serverless-plugin-include-dependencies": "^3.0.0"
   }
 }
